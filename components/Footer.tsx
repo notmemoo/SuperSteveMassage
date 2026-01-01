@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
@@ -7,11 +9,13 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           {/* Brand */}
           <div>
-            <h3 className="font-[family-name:var(--font-playfair)] text-2xl font-semibold mb-4">
-              Super Steve <span className="text-[#C4704A]">Massage</span>
-            </h3>
+            <a href="#" className="inline-block mb-4">
+              <span className="font-[family-name:var(--font-playfair)] text-2xl font-semibold">
+                SuperSteve <span className="text-[#C4704A]">LMT</span>
+              </span>
+            </a>
             <p className="text-gray-400 text-sm leading-relaxed">
-              Professional massage therapy with over 20 years of experience. 
+              Professional massage therapy with over 20 years of experience.
               Helping you reach optimal health and mobility.
             </p>
           </div>
@@ -85,7 +89,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="border-t border-gray-700 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-gray-500 text-sm">
-            © {currentYear} Super Steve Massage Therapy LLC. All rights reserved.
+            © {currentYear} SuperSteve LMT. All rights reserved.
           </p>
           <p className="text-gray-500 text-sm">
             Steve Thompson LMT, MA60714361

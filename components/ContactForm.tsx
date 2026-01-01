@@ -16,22 +16,20 @@ const ContactForm = () => {
     e.preventDefault();
     setStatus("sending");
 
-    // For now, we'll simulate sending - this can be connected to a backend later
-    // Options: Formspree, EmailJS, or custom API route
     try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      
-      // In production, you'd send to an API:
-      // const response = await fetch('/api/contact', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(formData),
-      // });
-      
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to send message');
+      }
+
       setStatus("success");
       setFormData({ name: "", email: "", phone: "", service: "", message: "" });
-      
+
       // Reset status after 5 seconds
       setTimeout(() => setStatus("idle"), 5000);
     } catch {

@@ -49,13 +49,25 @@ const IntakeForm = () => {
 
   const handleSubmit = async () => {
     setIsSubmitting(true);
-    
-    // Simulate form submission - replace with actual API call
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    
-    console.log("Form submitted:", formData);
-    setIsSubmitting(false);
-    setIsSubmitted(true);
+
+    try {
+      const response = await fetch('/api/intake', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to submit form');
+      }
+
+      setIsSubmitted(true);
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      alert('There was an error submitting your form. Please try again or call us directly.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (isSubmitted) {
@@ -92,9 +104,8 @@ const IntakeForm = () => {
           {steps.map((step) => (
             <div
               key={step.id}
-              className={`flex-1 text-center text-xs sm:text-sm font-medium ${
-                step.id <= currentStep ? "text-[#C4704A]" : "text-[#6B6B6B]"
-              }`}
+              className={`flex-1 text-center text-xs sm:text-sm font-medium ${step.id <= currentStep ? "text-[#C4704A]" : "text-[#6B6B6B]"
+                }`}
             >
               <span className="hidden sm:inline">{step.name}</span>
               <span className="sm:hidden">{step.id}</span>
@@ -354,8 +365,8 @@ const IntakeForm = () => {
       {/* Step 2: Medical History */}
       {currentStep === 2 && (
         <>
-          <FormSection 
-            title="Medical History" 
+          <FormSection
+            title="Medical History"
             description="Please check the box if you have any of the following conditions."
           >
             {medicalConditionsList.map((category) => (
@@ -462,8 +473,8 @@ const IntakeForm = () => {
       {/* Step 3: Body Diagram & Pain Assessment */}
       {currentStep === 3 && (
         <>
-          <FormSection 
-            title="Body Diagram" 
+          <FormSection
+            title="Body Diagram"
             description="Click or tap the area(s) in question and describe sensation(s) i.e. tight, sharp pain, sore, bruising, dull ache, etc."
           >
             <BodyDiagram
@@ -557,8 +568,8 @@ const IntakeForm = () => {
 
       {/* Step 4: Recent History */}
       {currentStep === 4 && (
-        <FormSection 
-          title="Recent History" 
+        <FormSection
+          title="Recent History"
           description="In the past 2 weeks..."
         >
           <div>
@@ -833,11 +844,10 @@ const IntakeForm = () => {
           type="button"
           onClick={prevStep}
           disabled={currentStep === 1}
-          className={`px-6 py-3 rounded-full font-medium transition-all ${
-            currentStep === 1
+          className={`px-6 py-3 rounded-full font-medium transition-all ${currentStep === 1
               ? "bg-gray-200 text-gray-400 cursor-not-allowed"
               : "bg-[#F5EDE5] text-[#2D2D2D] hover:bg-[#E8D5C4]"
-          }`}
+            }`}
         >
           ← Previous
         </button>
@@ -855,11 +865,10 @@ const IntakeForm = () => {
             type="button"
             onClick={handleSubmit}
             disabled={isSubmitting || !formData.waiverAgreed || !formData.waiverSignature}
-            className={`px-8 py-3 rounded-full font-medium transition-all flex items-center gap-2 ${
-              isSubmitting || !formData.waiverAgreed || !formData.waiverSignature
+            className={`px-8 py-3 rounded-full font-medium transition-all flex items-center gap-2 ${isSubmitting || !formData.waiverAgreed || !formData.waiverSignature
                 ? "bg-gray-300 text-gray-500 cursor-not-allowed"
                 : "bg-[#C4704A] text-white hover:bg-[#A85D3B]"
-            }`}
+              }`}
           >
             {isSubmitting ? (
               <>

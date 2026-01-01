@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -25,19 +26,21 @@ const Navigation = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? "bg-[#FDFBF9]/95 backdrop-blur-sm shadow-md py-3"
-          : "bg-transparent py-5"
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
+          ? "bg-[#FDFBF9]/95 backdrop-blur-sm shadow-md py-2"
+          : "bg-transparent py-4"
+        }`}
     >
       <nav className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
         <a
           href="#"
-          className="font-[family-name:var(--font-playfair)] text-xl md:text-2xl font-semibold text-[#2D2D2D] hover:text-[#C4704A] transition-colors"
+          className="hover:opacity-80 transition-opacity"
         >
-          Super Steve <span className="text-[#C4704A]">Massage</span>
+          <span className={`font-[family-name:var(--font-playfair)] font-semibold transition-all duration-300 ${isScrolled ? "text-2xl" : "text-3xl"}`}>
+            <span className="text-[#2D2D2D]">SuperSteve</span>{" "}
+            <span className="text-[#C4704A]">LMT</span>
+          </span>
         </a>
 
         {/* Desktop Navigation */}
