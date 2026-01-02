@@ -52,6 +52,16 @@ const Footer = () => {
                   New Client Forms
                 </a>
               </li>
+              <li>
+                <a href="/faq" className="text-gray-400 hover:text-[#C4704A] transition-colors text-sm">
+                  FAQ
+                </a>
+              </li>
+              <li>
+                <a href="/cancellation-policy" className="text-gray-400 hover:text-[#C4704A] transition-colors text-sm">
+                  Cancellation Policy
+                </a>
+              </li>
             </ul>
           </div>
 
