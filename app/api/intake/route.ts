@@ -2,84 +2,85 @@ import { Resend } from 'resend';
 import { NextResponse } from 'next/server';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
+const CONTACT_EMAIL = process.env.CONTACT_EMAIL || 'memomar168@gmail.com';
 
 interface BodyMarker {
-    id: string;
-    x: number;
-    y: number;
-    view: "front" | "back" | "left" | "right";
-    description: string;
+  id: string;
+  x: number;
+  y: number;
+  view: "front" | "back" | "left" | "right";
+  description: string;
 }
 
 interface IntakeFormData {
-    firstName: string;
-    lastName: string;
-    phone: string;
-    email: string;
-    birthMonth: string;
-    birthDay: string;
-    birthYear: string;
-    streetAddress: string;
-    city: string;
-    state: string;
-    zipCode: string;
-    emergencyContactName: string;
-    emergencyContactPhone: string;
-    howDidYouHear: string;
-    previousMassageExperience: string;
-    areasToFocus: string;
-    areasToAvoid: string;
-    numbnessOrTingling: string;
-    medicalConditions: string[];
-    allergyList: string;
-    surgeryHistory: string;
-    jointIssueAreas: string;
-    currentMedications: string;
-    bloodPressureMeds: string;
-    skinAllergies: string;
-    bodyMarkers: BodyMarker[];
-    causeOfInjury: string;
-    painScale: string;
-    painWorse: string;
-    painRelief: string;
-    treatmentGoals: string;
-    howLongSinceNoticed: string;
-    pastTreatments: string;
-    recentlyBeenSick: string;
-    currentNumbness: string;
-    alcoholLast24Hours: string;
-    marijuanaLast30Days: string;
-    painMedsLast24Hours: string;
-    recentSurgeries: string;
-    difficultyLayingDown: string;
-    recentTattoos: string;
-    glutesPermission: string;
-    chestPermission: string;
-    waiverAgreed: boolean;
-    waiverDate: string;
+  firstName: string;
+  lastName: string;
+  phone: string;
+  email: string;
+  birthMonth: string;
+  birthDay: string;
+  birthYear: string;
+  streetAddress: string;
+  city: string;
+  state: string;
+  zipCode: string;
+  emergencyContactName: string;
+  emergencyContactPhone: string;
+  howDidYouHear: string;
+  previousMassageExperience: string;
+  areasToFocus: string;
+  areasToAvoid: string;
+  numbnessOrTingling: string;
+  medicalConditions: string[];
+  allergyList: string;
+  surgeryHistory: string;
+  jointIssueAreas: string;
+  currentMedications: string;
+  bloodPressureMeds: string;
+  skinAllergies: string;
+  bodyMarkers: BodyMarker[];
+  causeOfInjury: string;
+  painScale: string;
+  painWorse: string;
+  painRelief: string;
+  treatmentGoals: string;
+  howLongSinceNoticed: string;
+  pastTreatments: string;
+  recentlyBeenSick: string;
+  currentNumbness: string;
+  alcoholLast24Hours: string;
+  marijuanaLast30Days: string;
+  painMedsLast24Hours: string;
+  recentSurgeries: string;
+  difficultyLayingDown: string;
+  recentTattoos: string;
+  glutesPermission: string;
+  chestPermission: string;
+  waiverAgreed: boolean;
+  waiverDate: string;
 }
 
 export async function POST(request: Request) {
-    try {
-        const data: IntakeFormData = await request.json();
+  try {
+    const data: IntakeFormData = await request.json();
 
-        // Format body markers for display
-        const bodyMarkersHtml = data.bodyMarkers.length > 0
-            ? data.bodyMarkers.map(m => `<li>${m.view} view: ${m.description}</li>`).join('')
-            : '<li>None marked</li>';
+    // Format body markers for display
+    const bodyMarkersHtml = data.bodyMarkers.length > 0
+      ? data.bodyMarkers.map(m => `<li>${m.view} view: ${m.description}</li>`).join('')
+      : '<li>None marked</li>';
 
-        // Format medical conditions
-        const medicalConditionsHtml = data.medicalConditions.length > 0
-            ? data.medicalConditions.map(c => `<span style="background: #fee; padding: 2px 8px; border-radius: 4px; margin: 2px; display: inline-block;">${c}</span>`).join(' ')
-            : 'None reported';
+    // Format medical conditions
+    const medicalConditionsHtml = data.medicalConditions.length > 0
+      ? data.medicalConditions.map(c => `<span style="background: #fee; padding: 2px 8px; border-radius: 4px; margin: 2px; display: inline-block;">${c}</span>`).join(' ')
+      : 'None reported';
 
-        // Send email to Steve
-        await resend.emails.send({
-            from: 'Super Steve Massage <onboarding@resend.dev>',
-            to: 'memomar168@gmail.com',
-            replyTo: data.email,
-            subject: `📋 New Client Intake Form: ${data.firstName} ${data.lastName}`,
-            html: `
+    // Send email to Steve
+    await resend.emails.send({
+      from: 'Super Steve Massage <onboarding@resend.dev>',
+      to: CONTACT_EMAIL,
+      replyTo: data.email,
+      subject: `📋 New Client Intake Form: ${data.firstName} ${data.lastName}`,
+      html: `
         <div style="font-family: Arial, sans-serif; max-width: 700px; margin: 0 auto; color: #2D2D2D;">
           <h1 style="color: #C4704A; border-bottom: 3px solid #C4704A; padding-bottom: 10px;">
             New Client Intake Form
@@ -165,14 +166,14 @@ export async function POST(request: Request) {
           </p>
         </div>
       `,
-        });
+    });
 
-        return NextResponse.json({ success: true });
-    } catch (error) {
-        console.error('Intake form error:', error);
-        return NextResponse.json(
-            { error: 'Failed to submit intake form' },
-            { status: 500 }
-        );
-    }
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    console.error('Intake form error:', error);
+    return NextResponse.json(
+      { error: 'Failed to submit intake form' },
+      { status: 500 }
+    );
+  }
 }

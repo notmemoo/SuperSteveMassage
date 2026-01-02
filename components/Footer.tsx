@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 

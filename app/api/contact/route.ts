@@ -2,6 +2,7 @@ import { Resend } from 'resend';
 import { NextResponse } from 'next/server';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
+const CONTACT_EMAIL = process.env.CONTACT_EMAIL || 'memomar168@gmail.com';
 
 export async function POST(request: Request) {
   try {
@@ -19,7 +20,7 @@ export async function POST(request: Request) {
     // Send email to Steve
     await resend.emails.send({
       from: 'Super Steve Massage <onboarding@resend.dev>',
-      to: 'memomar168@gmail.com',
+      to: CONTACT_EMAIL,
       replyTo: email,
       subject: `New Contact Form Submission from ${name}`,
       html: `
