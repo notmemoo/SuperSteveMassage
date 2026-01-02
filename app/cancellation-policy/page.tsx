@@ -164,7 +164,7 @@ export default function CancellationPolicyPage() {
                     <section className="text-center pt-6 border-t border-[#E8D5C4]">
                         <p className="text-[#6B6B6B] italic">
                             Thank you for understanding our policies. They help us provide the best service to all our clients
-                            while respecting everyone's time and commitment.
+                            while respecting everyone&apos;s time and commitment.
                         </p>
                     </section>
                 </div>

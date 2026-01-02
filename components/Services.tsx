@@ -12,6 +12,7 @@ const services = [
       { duration: "90 minutes", price: 133 },
       { duration: "120 minutes", price: 168 },
     ],
+    allowHotStones: true,
     icon: (
       <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
@@ -29,6 +30,7 @@ const services = [
       { duration: "120 minutes", price: 195 },
     ],
     featured: true,
+    allowHotStones: false, // Already includes hot stones
     icon: (
       <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
@@ -45,6 +47,7 @@ const services = [
       { duration: "60 minutes", price: 89 },
       { duration: "90 minutes", price: 133 },
     ],
+    allowHotStones: true,
     icon: (
       <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
@@ -61,6 +64,7 @@ const services = [
       { duration: "60 minutes", price: 121 },
       { duration: "90 minutes", price: 166 },
     ],
+    allowHotStones: true,
     icon: (
       <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
@@ -77,6 +81,7 @@ const services = [
       { duration: "60 minutes", price: 121 },
       { duration: "90 minutes", price: 165 },
     ],
+    allowHotStones: true,
     icon: (
       <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
@@ -92,6 +97,7 @@ const services = [
       { duration: "45 minutes", price: 65 },
       { duration: "60 minutes", price: 77 },
     ],
+    allowHotStones: true,
     icon: (
       <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
@@ -113,7 +119,7 @@ const Services = () => {
             Healing Treatments
           </h2>
           <p className="text-[#6B6B6B] max-w-2xl mx-auto leading-relaxed">
-            Choose from our range of professional massage therapies, each designed to 
+            Choose from our range of professional massage therapies, each designed to
             address your specific needs and help you achieve optimal wellness.
           </p>
         </div>
@@ -128,6 +134,7 @@ const Services = () => {
               prices={service.prices}
               icon={service.icon}
               featured={service.featured}
+              allowHotStones={service.allowHotStones}
             />
           ))}
         </div>
